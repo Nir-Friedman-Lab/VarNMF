@@ -1,0 +1,2 @@
+#!/bin/bash
+/opt/homebrew/bin/python3.10 /Users/elafallik/Documents/submission-github/Code/pipeline_code/setup_data_run.py --train_algo=NMF --N=185 --M=7000 --K=4 --bg=True --dir_name=CRC+SCLC/unsupervised1/selected-genes/ --output_dir=results/CRC+SCLC/unsupervised1/selected-genes/ --eps_train=0 --max_itr_train=250 --run_test=True --run_name_T=1 --bg_dir=data/CRC+SCLC/unsupervised1/ --data_dir=data/CRC+SCLC/unsupervised1/selected-genes/  > /Users/elafallik/Documents/submission-github/c_outputs/CRC+SCLC/unsupervised1/selected-genes/NMF/K=4-NMF-unsupervised1-selected-genes.txt
