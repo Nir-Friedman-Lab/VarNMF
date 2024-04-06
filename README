@@ -1,0 +1,14 @@
+To run on synthetic data:
+1. Run
+	python3 synthetic_test --cv=0.5 --K=4
+2. synthetic-test-plots-final.ipynb contains the plots code
+
+To run on cfchip data:
+0. Run the notebook cfchip-prepare-data.ipynb to prepare the dataset - filter genes, split to train and test etc. (for the unsupervised1 run this is already done)
+1. Run 
+	python3 run_bash_cluster_pipeline.py 
+   [or if you have access to slurs cluster, run python3 run_sbatch_cluster_pipeline.py]
+   This will output a list of bash commands you need to run and the relevant dependencies.
+2. Run the bash comments from whiten the Code dir following the dependencies 
+3. You should see the NMF results in results/CRC+SCLC/unsupervised1/selected-genes/ and VarNMF results in results/CRC+SCLC/unsupervised1/selected-genes/batch2/
+4. cfchip-plots-final.ipynb contains the plots code
