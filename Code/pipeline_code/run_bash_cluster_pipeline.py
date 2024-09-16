@@ -4,9 +4,15 @@ import shutil
 import os
 from pathlib import Path
 
+
+def mkdir(dir_path_wo_root, parents=True):
+    if not (root_path/dir_path_wo_root).exists(): (root_path/dir_path_wo_root).mkdir(parents=parents)
+
+
 root_path = Path(__file__).parent.parent.parent  # should always give "simulations"
 python_path = '/opt/homebrew/bin/python3.10'
 max_processes = 4
+
 
 def create_bash_file(job_file, job_name, job_python_name, job_args_str, job_output_path, array_name=None):
     # for regular use
@@ -76,7 +82,7 @@ def create_bash_file_NMF(N, M, K, dataset, sub_dir1, sub_dir2):
 
     itr_name = 'NMF'
     job_output_dir = f'c_outputs/{dataset}/{sub_dir1}/{sub_dir2}/{itr_name}'
-    if not (root_path / job_output_dir).exists(): (root_path / job_output_dir).mkdir(parents=True)
+    mkdir(job_output_dir, parents=True)
 
     job_output_path = f'{root_path}/{job_output_dir}'
     job_file = root_path/f'Code/sh_files/{dataset}/{sub_dir1}-{sub_dir2}-batch-{itr_name}-K={K}.sh'
@@ -107,7 +113,7 @@ def create_bash_file_trainAB(N, M, K, dataset, sub_dir1, sub_dir2, n_batches, it
     # Example: K=10, n_batches=70, N=185, M=100, dataset="ICLR-CRC+SCLC", sub_dir1="unsupervised", sub_dir2="medium-data"
     itr_name = 'trainAB' + ('' if itr == 1 else f'{itr}') + ('splitAB' if run_first else '')
     job_output_dir = f'c_outputs/{dataset}/{sub_dir1}/{sub_dir2}/{itr_name}/K={K}'
-    if not (root_path / job_output_dir).exists(): (root_path / job_output_dir).mkdir(parents=True)
+    mkdir(job_output_dir, parents=True)
 
     job_output_path = f'{root_path}/{job_output_dir}'
     job_file = root_path/f'Code/sh_files/{dataset}/{sub_dir1}-{sub_dir2}-batch-{itr_name}-K={K}.sh'
@@ -144,7 +150,7 @@ def create_bash_file_trainW(N, M, K, dataset, sub_dir1, sub_dir2, n_batches, itr
     # Example: K=10, n_batches=70, N=185, M=1000, dataset="ICLR-CRC+SCLC", sub_dir1="unsupervised", sub_dir2="medium-data"
     itr_name = 'trainW' + ('' if itr == 1 else f'{itr}') + ('-testW' if run_test else '')
     job_output_dir = f'c_outputs/{dataset}/{sub_dir1}/{sub_dir2}/{itr_name}'
-    if not (root_path / job_output_dir).exists(): (root_path / job_output_dir).mkdir(parents=True)
+    mkdir(job_output_dir, parents=True)
 
     job_output_path = f'{root_path}/{job_output_dir}'
     job_file = root_path/f'Code/sh_files/{dataset}/{sub_dir1}-{sub_dir2}-batch-{itr_name}-K={K}.sh'
@@ -175,7 +181,7 @@ def create_bash_file_posteriors(N, M, K, dataset, sub_dir1, sub_dir2, run_test=F
     # Example: K=10, N=185, M=7000, dataset="ICLR-CRC+SCLC", sub_dir1="unsupervised", sub_dir2="medium-data"
     itr_name = 'post' + ('-test' if run_test else '')
     job_output_dir = f'c_outputs/{dataset}/{sub_dir1}/{sub_dir2}/{itr_name}'
-    if not (root_path / job_output_dir).exists(): (root_path / job_output_dir).mkdir(parents=True)
+    mkdir(job_output_dir, parents=True)
 
     job_output_path = f'{root_path}/{job_output_dir}'
     job_file = root_path/f'Code/sh_files/{dataset}/{sub_dir1}-{sub_dir2}-batch-{itr_name}-K={K}.sh'
